@@ -1,0 +1,56 @@
+CREATE DATABASE IF NOT EXISTS jdbcDemo;
+USE jdbcDemo;
+
+DROP TABLE category;
+DROP TABLE product;
+
+CREATE TABLE IF NOT EXISTS category
+(
+    id   INT AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(25) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS product
+(
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    name        NVARCHAR(50) NOT NULL,
+    price       DOUBLE       NOT NULL CHECK ( price > 999999 ),
+    quantity    INT          NOT NULL CHECK ( quantity > 0),
+    color       NVARCHAR(25) NOT NULL,
+    category    NVARCHAR(20) NOT NULL,
+    description NVARCHAR(255)
+
+);
+
+#############################################################
+INSERT INTO category (name)
+VALUES ('Car'),
+       ('Electronics'),
+       ('Furniture'),
+       ('Books'),
+       ('Clothing'),
+       ('Toys'),
+       ('Sports Equipment'),
+       ('Beauty Products'),
+       ('Food'),
+       ('Office Supplies');
+
+INSERT INTO product (name, price, quantity, color, description, category)
+VALUES ('Electric Drill', 10000000, 100, 'Red', 'Why don’t scientists trust atoms? Because they make up everything!',
+        'Car'),
+       ('Smartphone', 10000000, 50, 'Black',
+        'Why did the scarecrow win an award? Because he was outstanding in his field!', 'Electronics'),
+       ('Sofa', 10000000, 10, 'Green',
+        'I told my computer I needed a break, and now it won’t stop sending me Kit Kats.', 'Furniture'),
+       ('Mystery Novel', 10000000, 200, 'Black', 'Why don’t skeletons fight each other? They don’t have the guts.', 'Clothing'),
+       ('Jeans', 11000000, 150, 'Yellow', 'Parallel lines have so much in common. It’s a shame they’ll never meet.',
+        'Sports Equipment'),
+       ('Action Figure', 11000000, 75, 'Green',
+        'I told my wife she was drawing her eyebrows too high. She looked surprised.', 'Beauty Products'),
+       ('Basketball', 11000000, 60, 'Yellow',
+        'Did you hear about the mathematician who’s afraid of negative numbers? He’ll stop at nothing to avoid them.',
+        'Office Supplies'),
+       ('Lipstick', 11000000, 80, 'White', 'I would avoid the sushi if I was you. It’s a little fishy.', 'Office Supplies'),
+       ('Organic Apples', 11000000, 100, 'Red', 'Why did the coffee file a police report? It got mugged.', 'Office Supplies'),
+       ('Desk Chair', 11000000, 20, 'Black', 'I told my wife she should embrace her mistakes. She gave me a hug.',
+        'Office Supplies');
