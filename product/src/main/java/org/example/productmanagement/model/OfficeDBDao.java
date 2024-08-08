@@ -66,8 +66,60 @@ public class OfficeDBDao {
             throw new RuntimeException("Error", e);
         }
     }
-    public static List<OfficedbDTO> searchOffice (int tang){
-        String
+
+    public static List<OfficedbDTO> searchOfficeFloor(int Tang,String vanPhong) throws ClassNotFoundException {
+        String searchFloor = "SELECT * FROM OfficeS WHERE Tang = ? AND LoaiVanPhong = ?";
+        List<OfficedbDTO> officeList = new ArrayList<>();
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(searchFloor);
+        ) {
+            statement.setInt(1, Tang);
+            statement.setString(2, vanPhong);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String maMB = resultSet.getString("MaMB");
+                int dienTich = resultSet.getInt("DienTich");
+                String trangThai = resultSet.getString("TrangThai");
+                int tang = resultSet.getInt("Tang");
+                String loaiVanPhong = resultSet.getString("LoaiVanPhong");
+                long giaChoThue = resultSet.getLong("GiaChoThue");
+                String ngayBatDau = resultSet.getString("NgayBatDau");
+                String ngayKetThuc = resultSet.getString("NgayKetThuc");
+                officeList.add(new OfficedbDTO(maMB, dienTich, trangThai, tang, loaiVanPhong, giaChoThue, ngayBatDau, ngayKetThuc));
+            }
+            System.out.println(officeList);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing select query", e);
+        }
+        return officeList;
+    }
+
+    public static List<OfficedbDTO> searchOfficeType(String type) throws ClassNotFoundException {
+        String searchFloor = "SELECT * FROM OfficeS WHERE LoaiVanPhong = ?";
+        List<OfficedbDTO> officeList = new ArrayList<>();
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(searchFloor);
+        ) {
+            statement.setString(1, type);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String maMB = resultSet.getString("MaMB");
+                int dienTich = resultSet.getInt("DienTich");
+                String trangThai = resultSet.getString("TrangThai");
+                int tang = resultSet.getInt("Tang");
+                String loaiVanPhong = resultSet.getString("LoaiVanPhong");
+                long giaChoThue = resultSet.getLong("GiaChoThue");
+                String ngayBatDau = resultSet.getString("NgayBatDau");
+                String ngayKetThuc = resultSet.getString("NgayKetThuc");
+                officeList.add(new OfficedbDTO(maMB, dienTich, trangThai, tang, loaiVanPhong, giaChoThue, ngayBatDau, ngayKetThuc));
+            }
+            System.out.println(officeList);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing select query", e);
+        }
+        return officeList;
     }
 }
 

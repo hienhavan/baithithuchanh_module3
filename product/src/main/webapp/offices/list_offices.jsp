@@ -30,6 +30,20 @@
 <div class="container mt-4">
     <h1>Premises Management</h1>
     <a class="btn btn-primary" href="<%=request.getContextPath()%>/addOffice">ADD OFFICE</a>
+    <form action="<%=request.getContextPath()%>/SearchFloor" method="post">
+        <input type="number" placeholder="so phong" name="tang"><br>
+        <label for="loaiVanPhong">Loại Văn Phòng</label>
+        <select class="form-control" id="loaiVanPhong" name="loaiVanPhong" required>
+            <option value="Tron goi">Trọn gói</option>
+            <option value="Chia se">Chia sẻ</option>
+        </select><br>
+        <label for="loaiVanPhong">Chon Theo ngay</label>
+        <label for="ngayBatDau">Ngày Bắt Đầu</label>
+        <input type="date" class="form-control" id="ngayBatDau" name="ngayBatDau" required>
+        <label for="ngayKetThuc">Ngày Kết Thúc</label>
+        <input type="date" class="form-control" id="ngayKetThuc" name="ngayKetThuc" required>
+        <input type="submit" value="tim kiem">
+    </form>
     <table class="table table-striped">
         <thead>
         <tr>
