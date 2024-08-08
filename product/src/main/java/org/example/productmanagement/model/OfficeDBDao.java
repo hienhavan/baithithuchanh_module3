@@ -66,5 +66,8 @@ public class OfficeDBDao {
             throw new RuntimeException("Error", e);
         }
     }
+    public static List<OfficedbDTO> searchOffice (int tang){
+        String
+    }
 }
 
